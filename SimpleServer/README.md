@@ -16,4 +16,4 @@ $ npm init
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/) [![HitCount](http://hits.dwyl.com/{marwari}/{NodeJs-Projects}.svg)](http://hits.dwyl.com/{marwari}/{NodeJs-Projects})
+[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/) [![HitCount](http://hits.dwyl.com/{marwari}/{NodeJs-Projects}.svg)]
