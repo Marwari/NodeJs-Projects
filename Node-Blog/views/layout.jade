@@ -1,0 +1,20 @@
+doctype html
+html
+	head
+		title= Node-Blog
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		.container
+			img.logo(src='/images/logo.gif')
+			nav
+				ul
+					li
+						a(href='/') Home
+					li
+						a(href='/posts/add') Add post
+					li
+						a(href='/categories/add') Add Category
+			!{messages}
+			block content
+			footer
+				p Node-Blog &copy; 2018
