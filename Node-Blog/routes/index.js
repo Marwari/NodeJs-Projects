@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
-var db = require('monk')('localhost/nodeblog');
+var db = require('monk')('mongodb://localhost:27017/nodeblog');
 
 /* Homepage Blog Posts. */
 router.get('/', function(req, res, next) {
