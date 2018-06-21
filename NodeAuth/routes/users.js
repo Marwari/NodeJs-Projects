@@ -29,32 +29,33 @@ router.post('/register', function(req, res, next){
 	var password2 = req.body.password2;
 
 //check for image field
-if(req.files && req.files.profileimage){
-	console.log('uploading file...');
+	if(req.files && req.files.profileimage){
+		console.log('uploading file...');
 	// file info
 	var profileImageOriginalName = req.files.profileimage.originalname;
 	var profileImageName = req.files.profileimage.name;
 	var profileImageMime = req.files.profileimage.mimetype;
 	var profileImagePath = req.files.profileimage.path;
-	var profileImageExt = req.files.profileimage.nameextension;
+	var profileImageExt = req.files.profileimage.extension;
 	var profileImageSize = req.files.profileimage.size;
-} else {
+	} else {
 	// set a default image
 	var profileImageName = 'noimage.png';
-}
+	}
 
-// form validation
-req.checkBody('name', 'Name field is required').notEmpty();
-req.checkBody('email', 'Email field is required').notEmpty();
-req.checkBody('email', 'Email is not valid').isEmail();
-req.checkBody('username', 'Username field is required').notEmpty();
-req.checkBody('password', 'Password field is required').notEmpty();
-req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+	// form validation
+	req.checkBody('name', 'Name field is required').notEmpty();
+	req.checkBody('email', 'Email field is required').notEmpty();
+	req.checkBody('email', 'Email is not valid').isEmail();
+	req.checkBody('username', 'Username field is required').notEmpty();
+	req.checkBody('password', 'Password field is required').notEmpty();
+	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
-//check errors
-var errors = req.validationErrors();
-if(errors){
-	res.render('register',{
+	//check errors
+	var errors = req.validationErrors();
+
+	if(errors){
+		res.render('register',{
 		errors : errors,
 		name : name,
 		email: email,
@@ -62,7 +63,8 @@ if(errors){
 		password: password,
 		password2: password2
 	});
-} else {
+	
+	} else {
 	var newUser = new User({
 		name : name,
 		email: email,
