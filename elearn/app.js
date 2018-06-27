@@ -18,6 +18,7 @@ async = require('async');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var classesRouter = require('./routes/classes');
+var studentsRouter = require('./routes/students');
 
 
 var app = express();
@@ -74,10 +75,20 @@ app.use(function(req, res, next){
 	next();
 });
 
+// makes the user object global in all views
+app.get('*', function(req, res, next){
+	// put user into res.locals for easy access from themplates
+	res.locals.user = req.user || null;
+	if(req.user){
+		res.locals.usertype = req.user.type;
+	}
+	next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/classes', classesRouter);
+app.use('/students', studentsRouter);
 
 
 // catch 404 and forward to error handler

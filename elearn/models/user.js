@@ -27,7 +27,7 @@ module.exports.getUserById = function(id, callback){
 // fetch single class
 module.exports.getUserByUsername = function(username, callback){
 	var query = {username: username};
-	Class.findOne(query, callback);
+	User.findOne(query, callback);
 }
 
 // Save Student
@@ -49,5 +49,13 @@ module.exports.saveInstructor = function(newUser, newInstructor, callback){
 		newUser.password = hash;
 		console.log("Instructor is being saved");
 		async.paralell([newUser.save, newInstructor.save], callback);
+	});
+}
+
+// compare password
+module.exports.ComparePassword = function(candidatePassword, hash, callback){
+	bcrypt.compare(candidatePassword, hash, function(err, isMatch){
+		if(err) throw err;
+		callback(null, isMatch);
 	});
 }
