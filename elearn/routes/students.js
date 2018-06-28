@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 Class = require('../models/class');
-Student = require('../models/Student');
+Student = require('../models/student');
 User = require('../models/user');
 
 router.get('/classes', ensureAuthenticated, function(req, res, next) {
@@ -11,7 +11,7 @@ router.get('/classes', ensureAuthenticated, function(req, res, next) {
 			console.log(err);
 			res.send(err);
 		} else{
-			res.render('student/classes', { "student": student });
+			res.render('students/classes', { "student": student });
 		}
 	});
 });

@@ -43,6 +43,7 @@ module.exports.register = function(info, callback){
 	var query = {username: student_username};
 	Student.findOneAndUpdate(
 		query,
+		// student_username,
 		{$push :{"classes": {class_id: class_id, class_title: class_title}}},
 		{safe: true, upsert: true},
 		callback

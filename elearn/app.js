@@ -19,6 +19,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var classesRouter = require('./routes/classes');
 var studentsRouter = require('./routes/students');
+var instructorsRouter = require('./routes/instructors');
 
 
 var app = express();
@@ -80,7 +81,7 @@ app.get('*', function(req, res, next){
 	// put user into res.locals for easy access from themplates
 	res.locals.user = req.user || null;
 	if(req.user){
-		res.locals.usertype = req.user.type;
+		res.locals.type = req.user.type;
 	}
 	next();
 });
@@ -89,6 +90,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/classes', classesRouter);
 app.use('/students', studentsRouter);
+app.use('/instructors', instructorsRouter);
 
 
 // catch 404 and forward to error handler
