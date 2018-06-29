@@ -54,6 +54,14 @@ router.post('/signup', function(req, res, next){
 			password2: password2
 		});
 	}else {
+
+		var newUser = User({
+			email: email,
+			username: username,
+			password: password,
+			type: type
+		});
+
 		var newStudent = new Student({
 			first_name: first_name,
 			last_name: last_name,
@@ -107,6 +115,7 @@ passport.deserializeUser(function(id, done){
 });
 
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash:'Wrong username or password'}), function(req, res){
+	console.log("Authentication Success");
 	req.flash('success', 'You are now logged in');
 	var usertype = req.user.type;
 	res.redirect('/'+usertype+'s/classes');
@@ -121,8 +130,12 @@ passport.use(new LocalStrategy(
 			}
 
 			User.comparePassword(password, user.password, function(err, isMatch){
-				if(err) return done(err);
+				if(err){ 
+					console.log("error "+err);
+					return done(err);}
+
 				if(isMatch){
+					console.log("Password Match")
 					return done(null, user);
 				} else {
 					console.log('Invalid Password');
@@ -137,7 +150,7 @@ router.get('/logout', function(req, res){
 	req.logout();
 	// success message
 	req.flash('success', "You have logged out");
-	res.redirect('/users/login');
+	res.redirect('/');
 });
 
 function ensureAuthenticated(req, res, next){

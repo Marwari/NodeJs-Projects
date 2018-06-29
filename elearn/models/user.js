@@ -33,27 +33,27 @@ module.exports.getUserByUsername = function(username, callback){
 // Save Student
 module.exports.saveStudent = function(newUser, newStudent, callback){
 	bcrypt.hash(newUser.password, 10, function(err, hash){
-		if(err) throw errl
+		if(err) throw err
 			//set hash
 		newUser.password = hash;
 		console.log("Student is being saved");
-		async.paralel([newUser.save, newStudent.save], callback);
+		async.parallel([newUser.save.bind(newUser), newStudent.save.bind(newStudent)], callback);
 	});
 }
 
 // Save Instructor
 module.exports.saveInstructor = function(newUser, newInstructor, callback){
 	bcrypt.hash(newUser.password, 10, function(err, hash){
-		if(err) throw errl
+		if(err) throw err
 			//set hash
 		newUser.password = hash;
 		console.log("Instructor is being saved");
-		async.paralell([newUser.save, newInstructor.save], callback);
+		async.parallel([newUser.save.bind(newUser), newInstructor.save.bind(newInstructor)], callback);
 	});
 }
 
 // compare password
-module.exports.ComparePassword = function(candidatePassword, hash, callback){
+module.exports.comparePassword = function(candidatePassword, hash, callback){
 	bcrypt.compare(candidatePassword, hash, function(err, isMatch){
 		if(err) throw err;
 		callback(null, isMatch);

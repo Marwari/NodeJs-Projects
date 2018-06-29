@@ -38,8 +38,15 @@ module.exports.addLesson = function(info, callback){
 
 	Class.findByIdAndUpdate(
 		class_id,
-		{$push:{"lessons": {lesson_number: lesson_number, lesson_title: lesson_title, lesson_body: lesson_body}}},
-		{safe: true, upsert: true},
-		callback
+		{$push:{"lessons": 
+		{
+			lesson_number: lesson_number, 
+			lesson_title: lesson_title, 
+			lesson_body: lesson_body
+		}}},
+		{
+			safe: true, 
+			upsert: true
+		}, callback
 		);
-}
+};
